@@ -1,14 +1,18 @@
 import { Provider } from "react-redux";
+
+import { Provider as AtomProvider } from "jotai";
+
 import "./App.css";
 import { store } from "./redux/store";
-import Router from "./routes";
-
+import Layout from "./layout";
 function App() {
   return (
     <>
-      <Provider store={store}>
-        <Router />
-      </Provider>
+      <AtomProvider>
+        <Provider store={store}>
+          <Layout />
+        </Provider>
+      </AtomProvider>
     </>
   );
 }
