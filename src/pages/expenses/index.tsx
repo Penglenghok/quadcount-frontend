@@ -56,6 +56,7 @@ const Expenses = () => {
                             <div className='expense_detail'>Paid by: {i.paid_by.name}</div>
                         </div>
                         <div className='expense_amount'>{i.amount} $</div>
+                        <div className='expense_delete'>Delete</div>
                     </div>)
                 }
             </div>

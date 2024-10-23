@@ -92,3 +92,7 @@ body {
 .expense_amount {
   font-size: 18px;
 }
+.expense_delete {
+  font-size: 18px;
+  color: rgb(223, 47, 47);
+}
