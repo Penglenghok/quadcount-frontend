@@ -6,14 +6,15 @@ type Props = {
     isModalOpen: boolean;
     handleOk: (members: Member[]) => void;
     handleCancel: () => void;
+    groupName: string
     setGroupName: (name: string) => void;
     availableMembers: Member[];
 };
 
 const GroupModal = (props: Props) => {
-    const { isModalOpen, handleOk, handleCancel, setGroupName, availableMembers } = props;
+    const { isModalOpen, handleOk, handleCancel, setGroupName, availableMembers, groupName } = props;
     const [form] = Form.useForm();
-    const [selectedMemberId, setSelectedMemberId] = useState<string | undefined>(undefined);
+    const [selectedMemberId, setSelectedMemberId] = useState<number | undefined>(undefined);
     const [addedMembers, setAddedMembers] = useState<Member[]>([]);
     const [membersError, setMembersError] = useState<string | null>(null);
 
@@ -26,6 +27,8 @@ const GroupModal = (props: Props) => {
                 }
                 setMembersError(null);
                 handleOk(addedMembers);
+                setAddedMembers([]);
+                setGroupName("")
             })
             .catch(() => { });
     };
@@ -41,14 +44,14 @@ const GroupModal = (props: Props) => {
         }
     };
 
-    const handleRemoveMember = (id: string) => { setAddedMembers(addedMembers.filter((m) => m.id !== id)); };
+    const handleRemoveMember = (id: number) => { setAddedMembers(addedMembers.filter((m) => m.id !== id)); };
 
     return (
         <Modal title="Create New Group" open={isModalOpen} onOk={onOk} onCancel={handleCancel} >
             <Form form={form}>
                 <Form.Item label="Group Name:" name="groupName"
                     rules={[{ required: true, message: "Please enter a group name" }]} >
-                    <Input placeholder="Enter group name" onChange={(e) => setGroupName(e.target.value)} />
+                    <Input placeholder="Enter group name" value={groupName} onChange={(e) => setGroupName(e.target.value)} />
                 </Form.Item>
                 <Form.Item label="Members:">
                     <div style={{ display: "flex", gap: "8px" }}>
