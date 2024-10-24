@@ -5,20 +5,22 @@ import GroupList from "../../components/GroupList";
 import GroupModal from "../../components/GroupModal";
 import { httpRequest } from "../../config/axios";
 import { IGroup } from "../../types/group.type";
-
-
-export type Member = {
-  id: number;
-  name: string;
-  email: string
-};
+import { IReducers } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { IUser } from "../../types/auth.type";
+import { createGroupAction } from "../../redux/action/group.action";
 
 const Group = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [groupName, setGroupName] = useState('');
   const [groups, setGroups] = useState<IGroup[]>([]);
   const [groupUpdated, setGroupUpdated] = useState(false);
-  const [members, setMembers] = useState<Member[]>([])
+  const [members, setMembers] = useState<IUser[]>([])
+
+  const dispatch = useDispatch();
+  const { users } = useSelector((state: IReducers) => state.user);
+  const { user } = useSelector((state: IReducers) => state.auth);
+
 
   useEffect(() => {
     fetchGroup();
@@ -44,15 +46,19 @@ const Group = () => {
     }
   };
 
-  const handleAddGroup = async (selectedMembers: Member[]) => {
+  const handleAddGroup = async (selectedMembers: IUser[]) => {
     try {
-      const userIds = selectedMembers.map(member => member.id);
-      const response = await httpRequest.post('groups', {
+      //const userIds = selectedMembers.map(member => member.id);
+      // const response = await httpRequest.post('groups', {
+      //   name: groupName,
+      //   userId: userIds,
+      // });
+      const payload: IGroup = {
         name: groupName,
-        userId: userIds,
-      });
+        users: [user, ...members.filter((item: any) => item.id !== user.id)],
+      };
+      await dispatch(createGroupAction(payload) as any);
       setIsModalOpen(false);
-      console.log(response)
       setGroupUpdated(prev => !prev);
     } catch (error) {
       console.error('Error creating group:', error);

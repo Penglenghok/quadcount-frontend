@@ -1,10 +1,10 @@
 import { Button, Form, Input, Modal, Select, List } from "antd";
 import { useState } from "react";
-import { Member } from "../pages/Home/Group";
+import { IUser } from "../types/auth.type";
 
 type Props = {
     isModalOpen: boolean;
-    handleOk: (members: Member[]) => void;
+    handleOk: (members: IUser[]) => void;
     handleCancel: () => void;
     groupName: string
     setGroupName: (name: string) => void;
@@ -62,7 +62,7 @@ const GroupModal = (props: Props) => {
                             style={{ flex: 1 }}
                         >
                             {availableMembers.map((member) => (
-                                <Select.Option key={member.id} value={member.id}>{member.email}</Select.Option>
+                                <Select.Option key={member.id} value={member.id}>{member.first_name + " " + member.last_name}</Select.Option>
                             ))}
                         </Select>
                         <Button onClick={handleAddMember} type="primary">Add</Button>
@@ -83,7 +83,7 @@ const GroupModal = (props: Props) => {
                                 </Button>,
                             ]}
                         >
-                            {member.email}
+                            {member.first_name + " " + member.last_name}
                         </List.Item>
                     )}
                     />

@@ -7,8 +7,8 @@ export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/Check" element={<Group />} />
+        <Route path="/" element={<Group />} />
+        <Route path="/Home" element={<Home />} />
         <Route path="/expense/:id" element={<Expenses />} />
       </Routes>
     </BrowserRouter>
