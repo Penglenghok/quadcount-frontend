@@ -23,6 +23,7 @@ import { getUserAction } from "../../redux/action/user.action";
 import { useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import { selectedGroupAtom } from "../../atom/group.atom";
+import { logoutAction } from "../../redux/action/auth.action";
 
 type Props = {};
 
@@ -66,6 +67,10 @@ export default function Home({}: Props) {
     setGroup(item);
   };
 
+  const onLogout = () => {
+    dispatch(logoutAction() as any);
+  };
+
   useEffect(() => {
     dispatch(getGroupAction(user.id) as any);
     dispatch(getUserAction() as any);
@@ -83,6 +88,7 @@ export default function Home({}: Props) {
           <Form.Item
             label="Title"
             name="name"
+            style={{ color: "white" }}
             rules={[{ required: true, message: "Please input expense title" }]}
           >
             <Input />
@@ -105,7 +111,10 @@ export default function Home({}: Props) {
 
   return (
     <div className="home-container">
-      <Typography.Title>Group Expense</Typography.Title>
+      <Button className="logout-button" onClick={onLogout}>
+        Logout
+      </Button>
+      <h1>Group Expense</h1>
       <Row wrap style={{ width: "500px" }}>
         {groups?.map((item) => {
           return (

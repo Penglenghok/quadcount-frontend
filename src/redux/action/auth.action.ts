@@ -15,8 +15,15 @@ export const loginAction = createAsyncThunk(
     const user: userResponse = (
       await httpRequest.post("auth/login", credential)
     ).data;
-     storeToken(user.token);
+    storeToken(user.token);
     return user;
+  }
+);
+
+export const registerAction = createAsyncThunk(
+  "register",
+  async (payload: IUser) => {
+    await httpRequest.post("auth/register", payload);
   }
 );
 

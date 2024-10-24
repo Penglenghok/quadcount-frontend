@@ -1,7 +1,8 @@
-import { Button, Form, Input } from "antd";
+import { Button, Divider, Form, Input } from "antd";
 import "./Login.css";
 import { useDispatch } from "react-redux";
 import { loginAction } from "../../redux/action/auth.action";
+import { useNavigate } from "react-router-dom";
 
 type Props = {};
 
@@ -11,6 +12,8 @@ export default function Login({}: Props) {
   const onFinish = (values: any) => {
     dispatch(loginAction(values) as any);
   };
+
+  const navigate = useNavigate();
 
   return (
     <div className="login-container">
@@ -31,7 +34,7 @@ export default function Login({}: Props) {
           rules={[
             {
               required: true,
-              message: "Please input your username!",
+              message: "Please input your Email!",
               type: "email",
             },
           ]}
@@ -53,6 +56,10 @@ export default function Login({}: Props) {
           </Button>
         </Form.Item>
       </Form>
+      <Divider />
+      <Button type="dashed" onClick={() => navigate("/register")}>
+        Register
+      </Button>
     </div>
   );
 }

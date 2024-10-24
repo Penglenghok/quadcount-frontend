@@ -4,6 +4,7 @@ import {
   checkAuthenticationAction,
   loginAction,
   logoutAction,
+  registerAction,
 } from "../action/auth.action";
 
 const initialState = {
@@ -49,6 +50,15 @@ export const authSlice = createSlice({
       .addCase(checkAuthenticationAction.rejected, (state) => {
         state.loading = false;
         state.user = {};
+      })
+      .addCase(registerAction.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(registerAction.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(registerAction.rejected, (state) => {
+        state.loading = false;
       });
   },
 });
