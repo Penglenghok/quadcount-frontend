@@ -35,9 +35,9 @@ const GroupList = (props: Props) => {
                         <Button type="link" onClick={() => onGroupDetail(group)} >
                             Details
                         </Button>
-                        <Button type="link" danger onClick={() => handleDelete(group.id)} >
+                        {/* <Button type="link" danger onClick={() => handleDelete(group.id)} >
                             Remove
-                        </Button>
+                        </Button> */}
                     </div>
                 ))
             }

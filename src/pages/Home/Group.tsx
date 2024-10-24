@@ -67,7 +67,7 @@ const Group = () => {
 
   return (
     <>
-      <div className="container-sm relative h-full flex flex-col items-center justify-center">
+      <div className="container relative h-full flex flex-col items-center justify-center">
         {groups.length > 0 ? (
           <GroupList groups={groups} handleDelete={handleDelete} />
         ) : (

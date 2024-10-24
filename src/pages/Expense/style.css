@@ -2,8 +2,16 @@ body {
     background-color: #333;
     color: white;
   }
+
+  .container{
+    width: 100vw;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+  }
   .container-sm {
-    max-width: 600px;
+    width: 800px !important;
     margin-inline: auto;
   }
   .relative {

@@ -113,7 +113,7 @@ const Expenses = () => {
   if (loading) return <LoadingComponent></LoadingComponent>;
 
   return (
-    <div className="container-sm relative h-full">
+    <div className="container relative h-full">
       {_.isEmpty(expenses) ? (
         <div className="h-full flex items-center">
           <div className="text-center">
@@ -128,9 +128,9 @@ const Expenses = () => {
           </div>
         </div>
       ) : (
-        <div>
+        <div className="container" style={{ width: 1000 }}>
           <h1>Total Expense: ${calculateTotalExpense().toFixed(2)}</h1>
-          <Row gutter={16}>
+          <Row gutter={16} style={{ width: 1000 }}>
             <Col span={12}>
               <div className="expenses_list-wrapper">
                 <h3 className="mb-0">Expenses:</h3>
